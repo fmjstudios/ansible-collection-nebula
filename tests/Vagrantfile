@@ -12,6 +12,27 @@ Vagrant.configure("2") do |config|
   end
 
   # Configure Ansible controller
+  config.vm.define "ctrl" do |vm1|
+    vm1.vm.box = "generic/ubuntu2204"
+    vm1.vm.hostname = "ctrl.local"
+    vm1.vm.disk :disk,
+      size: "25GB",
+      primary: true
+    
+    # Libvirt machine specific settings
+    vm1.vm.provider :libvirt do |lb|
+      lb.memory = 2048
+      lb.cpus = 2
+    end
+      
+    # Private networking
+    vm1.vm.network :private_network,
+      :ip => "172.16.0.100",
+      :libvirt__dhcp_enabled => false,
+      :libvirt__domain_name => "ctrl.local"
+  end
+
+  # Configure Ansible managed node 1
   config.vm.define "node1" do |vm1|
     vm1.vm.box = "generic/ubuntu2204"
     vm1.vm.hostname = "node1.local"
@@ -27,10 +48,10 @@ Vagrant.configure("2") do |config|
       
     # Private networking
     vm1.vm.network :private_network,
-      :ip => "172.16.0.100",
+      :ip => "172.16.0.101",
       :libvirt__dhcp_enabled => false,
       :libvirt__domain_name => "node1.local"
-
   end
+
 end
 

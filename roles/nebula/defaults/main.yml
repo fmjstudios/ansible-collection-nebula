@@ -11,7 +11,8 @@ nebula_system_user: '{{ nebula_system_group }}'
 nebula_path_config: /etc/nebula
 nebula_path_config_file: '{{ nebula_config_path }}/config.yml'
 
-nebula_config_override: false
+nebula_overwrite_config: false
+
 nebula_config_pki:
   ca: '{{ nebula_path_config }}/ca.crt'
   cert: '{{ nebula_path_config }}/host.crt'
