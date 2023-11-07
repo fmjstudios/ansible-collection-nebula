@@ -1,0 +1,170 @@
+---
+nebula_version: '1.7.2'
+nebula_custom_checksum: ''
+
+nebula_install: true
+nebula_install_type: ''
+
+nebula_system_group: nebula
+nebula_system_user: '{{ nebula_system_group }}'
+
+nebula_path_config: /etc/nebula
+nebula_path_config_file: '{{ nebula_config_path }}/config.yml'
+
+nebula_config_override: false
+nebula_config_pki:
+  ca: '{{ nebula_path_config }}/ca.crt'
+  cert: '{{ nebula_path_config }}/host.crt'
+  key: '{{ nebula_path_config }}/host.key'
+  blocklist: []
+
+nebula_config_static_host_map: {}
+# "192.168.100.1": ["100.64.22.11:4242"]
+#
+# Schema:
+# {nebula ip}": ["{routable ip/dns name}:{routable port}"]
+
+nebula_config_static_map: {}
+# network: ip4
+# cadence: 30s
+# lookup_timeout: 250ms
+
+nebula_config_lighthouse: {}
+# am_lighthouse: false
+# serve_dns: true
+# dns:
+#   host: 0.0.0.0
+#   port: 53
+# interval: 60
+# hosts:
+#   - '192.168.100.1'
+
+# remote_allow_list:
+#   '172.16.0.0/12': false
+#   '0.0.0.0/0': true
+#   '10.0.0.0/8': false
+#   '10.42.42.0/24': true
+
+# local_allow_list:
+#   interfaces:
+#     tun0: false
+#     'docker.*': false
+#   '10.0.0.0/8': true
+
+# advertise_addrs:
+#   - '1.1.1.1:4242'
+#   - '1.2.3.4:0' # port will be replaced with the real listening port
+
+# calculated_remotes:
+#   10.0.10.0/24:
+#     - mask: 192.168.1.0/24
+#       port: 4242
+
+nebula_config_listen: {}
+# host: 0.0.0.0
+# port: 4242
+# batch: 64
+# read_buffer: 10485760
+# write_buffer: 10485760
+
+nebula_config_punchy: {}
+# punch: true
+# respond: true
+# delay: 1s
+# respond_delay: 5s
+
+nebula_config_cipher: 'aes'
+nebula_config_preferred_ranges: []
+# ['172.16.0.0/24']
+
+nebula_config_relay: {}
+# relays:
+#   - 192.168.100.1
+# am_relay: false
+# use_relays: true
+
+nebula_config_tun: {}
+# disabled: false
+# dev: nebula1
+# drop_local_broadcast: false
+# drop_multicast: false
+# tx_queue: 500
+# mtu: 1300
+# routes:
+#   - mtu: 8800
+#     route: 10.0.0.0/16
+# unsafe_routes:
+#   - route: 172.16.1.0/24
+#     via: 192.168.100.99
+#     mtu: 1300 # mtu will default to tun mtu if this option is not specified
+#     install: true # controls whether this route is installed in the systems routing table.
+
+nebula_config_sshd: {}
+# enabled: true
+# listen: 127.0.0.1:2222
+# host_key: /path/to/ssh_host_ed25519_key
+# authorized_users:
+#   - user: steeeeve
+#     keys:
+#       - '[ssh public key string]'
+
+nebula_config_logging: {}
+# level: info
+# format: text
+# #disable_timestamp: true
+# #timestamp_format: "2006-01-02T15:04:05.000Z07:00"
+
+nebula_config_firewall: {}
+# outbound_action: drop
+# inbound_action: drop
+
+# conntrack:
+#   tcp_timeout: 12m
+#   udp_timeout: 3m
+#   default_timeout: 10m
+
+# outbound:
+#   # Allow all outbound traffic from this node
+#   - port: any
+#     proto: any
+#     host: any
+
+# inbound:
+#   # Allow icmp between any nebula hosts
+#   - port: any
+#     proto: icmp
+#     host: any
+
+#   # Allow tcp/443 from any host with BOTH laptop and home group
+#   - port: 443
+#     proto: tcp
+#     groups:
+#       - laptop
+#       - home
+
+nebula_config_routines: '1'
+
+nebula_config_stats: {}
+# type: graphite
+# prefix: nebula
+# protocol: tcp
+# host: 127.0.0.1:9999
+# interval: 10s
+
+# type: prometheus
+# listen: 127.0.0.1:8080
+# path: /metrics
+# namespace: prometheusns
+# subsystem: nebula
+# interval: 10s
+
+# message_metrics: false
+
+# lighthouse_metrics: false
+
+nebula_config_handshakes: {}
+# try_interval: 100ms
+# retries: 10
+# trigger_buffer: 64
+
+nebula_uninstall: false

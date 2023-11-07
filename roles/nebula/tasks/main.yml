@@ -1,0 +1,36 @@
+---
+- name: Preflight
+  ansible.builtin.include_tasks:
+    file: preflight.yml
+    apply:
+      tags:
+        - nebula_node_install
+        - nebula_node_configure
+        - nebula_node_run
+  tags:
+    - nebula_node_install
+    - nebula_node_configure
+    - nebula_node_run
+
+- name: Install
+  ansible.builtin.include_tasks:
+    file: install.yml
+    apply:
+      become: true
+      tags:
+        - nebula_node_install
+  tags:
+    - nebula_node_install
+
+- name: Configure
+  ansible.builtin.include_tasks:
+    file: configure.yml
+    apply:
+      become: true
+      tags:
+        - nebula_node_configure
+  tags:
+    - nebula_node_configure
+
+- name: Flush handlers after run.
+  ansible.builtin.meta: flush_handlers

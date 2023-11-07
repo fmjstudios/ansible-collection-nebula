@@ -1,0 +1,20 @@
+---
+- name: install | Create Nebula system group and users
+  block:
+    - name: Create Nebula system group
+      ansible.builtin.group:
+        name: '{{ nebula_system_group }}'
+        state: present
+        system: true
+
+    - name: Create Nebula system user
+      ansible.builtin.user:
+        name: '{{ nebula_system_user }}'
+        group: '{{ nebula_system_group }}'
+        append: true
+        shell: /usr/sbin/nologin
+        system: true
+        create_home: false
+      when: nebula_system_user != ""
+
+- name: install | Create Nebula installation directories
